@@ -1,0 +1,39 @@
+
+body {
+    background: #cdead3; /* fallback for old browsers */
+    background: -webkit-linear-gradient(
+        to right,
+        #eef2f3,
+        #cdead3
+    ); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(
+        to right,
+        #eef2f3,
+        #cdead3
+    ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+
+.sidebar {
+    background-color: #28a745; /* Cor verde */
+    height: 100vh;
+    position: fixed;
+    color: white; /* Cor do texto */
+}
+
+.sidebar .nav-link {
+    color: white;
+    border-radius: 10px;
+}
+
+.nav-item{
+    margin-bottom: 20px;
+}
+.sidebar .nav-link.active {
+    background-color: #218838; /* Cor verde mais escura para o item ativo */
+}
+
+.nav-item:hover{
+    background-color: #218838;
+    border-radius: 10px;
+}
