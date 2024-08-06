@@ -13,27 +13,66 @@ body {
     ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
-
 .sidebar {
-    background-color: #28a745; /* Cor verde */
     height: 100vh;
-    position: fixed;
-    color: white; /* Cor do texto */
+    background-color: #004928;
 }
-
 .sidebar .nav-link {
     color: white;
     border-radius: 10px;
 }
-
-.nav-item{
-    margin-bottom: 20px;
-}
 .sidebar .nav-link.active {
-    background-color: #218838; /* Cor verde mais escura para o item ativo */
+    background-color: #009245;
+    transform: translateX(10px);
+}
+
+.logo {
+    padding: 20px 0;
+}
+
+.logo img {
+    max-width: 150px;
 }
 
 .nav-item:hover{
-    background-color: #218838;
+    background-color: #009245;
     border-radius: 10px;
+    transform: translateX(10px);
+}
+.nav-item{
+    margin-bottom: 20px;
+    transition: all 0.5s;
+    width: 80%;
+
+}
+
+.text-verde{
+    color: #007f46;
+    font-weight: bold;
+}
+
+.card{
+    border-radius: 15px;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    min-width: 20%;
+    max-width: 100%;
+    background-color: #ffffff;
+}
+
+.mapa{
+    border-radius: 15px;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    min-width: 70%;
+    max-width: 70%;
+    background-color: #ffffff;
+
+}
+
+.mapa-infos{
+    border-radius: 15px;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    min-width: 20%;
+    max-width: 30%;
+    background-color: #ffffff;
+
 }

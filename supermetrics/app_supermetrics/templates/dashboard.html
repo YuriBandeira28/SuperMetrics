@@ -4,21 +4,26 @@
     <link href="{% static '/css/styles.css' %}" rel="stylesheet">
     <div class="container-fluid">
         <div class="row">
-            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse p-3">
-                <div class="position-sticky">
+            <!-- Sidebar -->
+            <nav class="col-md-4 col-lg-2 d-md-block sidebar collapse">
+                <div class="position-sticky pt-3">
+                    <div class="logo text-center  text-light">
+                        <!-- <img src="supermetrics-logo.png" alt="Supermetrics Logo" class="img-fluid"> -->
+                        <h3>SuperMetrics</h3>
+                    </div>
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">
+                            <a class="nav-link active" aria-current="page" href="#inicio">
                                 Início
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
-                                Mapas
+                            <a class="nav-link" href="#mapa">
+                                Mapa
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">
+                            <a class="nav-link" href="#relatorios">
                                 Relatórios
                             </a>
                         </li>
@@ -26,8 +31,42 @@
                 </div>
             </nav>
 
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 mt-3" id="inicio">
-
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <div>
+                    <div class="bg-light p-3 mt-3 card col-12" id="inicio">
+                        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                            <h2 class="text-verde">Bem-vindo ao SuperMetrics</h2>
+                        </div>
+                        <p>Um sistema para <span class="text-verde">VOCÊ</span> acompanhar os relatórios do <span class="text-verde">SEU NEGÓCIO</span> de fomra mais assertiva.</p>
+                    </div>
+                    <div class="bg-light p-3 mt-3 card" id="relatorios">
+                        <div class="mb-3">
+                            <h5 class="text-verde m-0">Relatórios</h5>
+                        </div>
+                        <div class="d-flex flex-wrap">
+                            <div class="col me-2 p-3 card">
+                                teste
+                            </div>
+                            <div class="col p-3 card">
+                                teste
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-light p-3 mt-3 card" id="mapa">
+                        <div class="mb-3">
+                            <h5 class="text-verde m-0">Mapa</h5>
+                        </div>
+                        <div class="d-flex flex-wrap">
+                            <div class="col me-2 p-3 mapa">
+                                teste
+                            </div>
+                            <div class="col p-3 mapa-infos">
+                                teste
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
             </main>
         </div>
     </div>
