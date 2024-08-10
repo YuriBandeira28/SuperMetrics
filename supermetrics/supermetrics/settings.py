@@ -1,5 +1,7 @@
 from pathlib import Path
 import os
+import supermetrics.config
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -68,7 +70,7 @@ DATABASES = {
         'NAME': 'ppi',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': '192.168.6.16',  
+        'HOST': supermetrics.config.bd_url,  
         'PORT': '5432',       
     }
 }
@@ -118,7 +120,7 @@ STATIC_URL = '/static/'
 
 # Diretórios adicionais que contêm arquivos estáticos
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
+    os.path.join(BASE_DIR, 'app_supermetrics/static'),
 ]
 
 # Default primary key field type
