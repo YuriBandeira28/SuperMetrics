@@ -51,13 +51,28 @@ body {
     color: #007f46;
     font-weight: bold;
 }
-
 .card{
     border-radius: 15px;
     box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
-    min-width: 20%;
+    min-width: 40%;
     max-width: 100%;
     background-color: #ffffff;
+    margin-bottom: 10px;
+}
+.grafico-barras{
+    border-radius: 15px;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    min-width: 100%;
+    max-width: 100%;
+    background-color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.grafico-div{
+    width: 100%;
+    height: 100%;
+    justify-content: left;
+    align-items: left;
 }
 
 .mapa-div{
@@ -67,7 +82,6 @@ body {
     max-width: 70%;
     height: 520px;
     background-color: #ffffff;
-
 }
 
 .mapa{
