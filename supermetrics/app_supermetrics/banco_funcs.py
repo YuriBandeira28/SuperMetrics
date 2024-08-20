@@ -116,3 +116,21 @@ def get_df_brarras():
     df = pd.read_sql(sql, engine)
     engine.dispose()
     return df
+
+def get_compras_produto():
+    engine = create_engine()
+
+    sql = """select 
+                s.subnom as "Produto",
+                count(distinct s.nfnumero) as "Total de Compras"
+            from supermercado s
+            where 
+                s.nfforcod <> 99999
+                and extract (month from s.nfdatemis) = 6
+            group by 
+                s.subnom
+            having count(distinct s.nfnumero) >=500
+            order by "Total de Compras" desc"""
+    df = pd.read_sql(sql, engine)
+    engine.dispose()
+    return df

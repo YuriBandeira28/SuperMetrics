@@ -52,3 +52,24 @@ def cria_grafico_barras(df: pd.DataFrame):
     )
     
     return fig.to_html(full_html=False)
+
+def cria_grafico_produtos(df: pd.DataFrame):
+    fig = px.bar(df, 
+                 x='Produto', 
+                 y='Total de Compras', 
+                 color='Produto', 
+                 barmode='stack')  
+    
+    fig.update_layout(
+        showlegend=True,
+        legend=dict(
+            orientation="v", 
+            yanchor="top",
+            y=1, 
+            xanchor="left",
+            x=-0.5
+        ),
+        autosize=True
+    )
+    
+    return fig.to_html(full_html=False)

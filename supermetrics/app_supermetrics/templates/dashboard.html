@@ -39,27 +39,31 @@
                         </div>
                         <div class="d-flex flex-wrap">
                             <div class="col me-2 p-3 card ">
-                                <p class="text-verde text-start">Quantidade de compras por dia do mês</p>
+                                <p class="text-verde text-start fw-bold">Quantidade de compras por dia do mês</p>
                                 <div class="grafico">
                                     {{grafico | safe}}
                                 </div>
                             </div>
                             <div class="col p-3 card ">
-                                <p class="text-verde text-start">Quantidade de compras Cidade x Interior</p>
+                                <p class="text-verde text-start fw-bold">Quantidade de compras Cidade x Interior</p>
                                 <div class="grafico-div">
                                     {{grafico_pizza | safe}}
                                 </div>
                             </div>
                             <div class="col p-3 grafico-div grafico-barras">
-                                <p class="text-verde text-start">Quantidade de compras Cidade x Interior</p>
+                                <p class="text-verde text-start fw-bold">Quantidade de compras Cidade x Interior</p>
                                 {{grafico_barras | safe}}
+                            </div>
+                            <div class="col p-3 grafico-div grafico-barras">
+                                <p class="text-verde text-start fw-bold">Quantidade de compras por produto no útlmo mês</p>
+                                {{grafico_produtos | safe}}
                             </div>
                         </div>
                     </div>
                     <div class="bg-light p-3 mt-3 card mb-5" id="mapa">
                         <div class="mb-3">
                             <h5 class="text-verde m-0">Mapa</h5>
-                            <p class="text-verde text-start">Quantidade de compras por bairro</p>
+                            <p class="text-verde text-start fw-bold">Quantidade de compras por bairro</p>
                         </div>
                         <div class="d-flex flex-wrap">
                             <div class="col me-2 p-3 mapa-div">
