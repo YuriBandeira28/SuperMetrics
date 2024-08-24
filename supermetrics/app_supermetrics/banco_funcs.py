@@ -69,6 +69,22 @@ def get_df_compras_dia():
 
     return df
 
+def get_df_compras_mes():
+    engine = create_engine()
+
+    sql = """select 
+                extract (month from s.nfdatemis) as "Mês",
+                count(distinct s.nfnumero) as "Total de Compras"
+            from 
+                supermercado s 
+            where  
+                s.nfforcod <> 99999
+            group by extract (month from s.nfdatemis)"""
+    df = pd.read_sql(sql, engine)
+    engine.dispose()
+
+    return df
+
 def get_df_pizza():
     engine = create_engine()
 

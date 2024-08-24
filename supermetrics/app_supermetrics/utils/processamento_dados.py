@@ -20,6 +20,18 @@ def cria_grafico_compras_dia_mes(df: pd.DataFrame):
     )
     return fig.to_html(full_html=False)
 
+def cria_grafico_compras_mes(df: pd.DataFrame):
+    fig = px.line(df, x='Mês', y='Total de Compras')
+    fig.update_traces(line=dict(width=3, color='#009245'))   
+    fig.update_layout(
+        showlegend=False,
+        margin=dict(t=100, l=40, r=40),
+        autosize=True,
+        height=600,
+        width=550
+    )
+    return fig.to_html(full_html=False)
+
 def cria_grafico_pizza(df: pd.DataFrame):
     fig = px.pie(df, names=df.columns[0], values=df.columns[1], color_discrete_sequence=["#ffc107", "#009245"])
     fig.update_layout(
@@ -73,3 +85,23 @@ def cria_grafico_produtos(df: pd.DataFrame):
     )
     
     return fig.to_html(full_html=False)
+
+
+def mapeia_meses(mes):
+
+    mapeamento = {
+        1: 'Janeiro',
+        2: 'Fevereiro',
+        3: 'Março',
+        4: 'Abril',
+        5: 'Maio',
+        6: 'Junho',
+        7: 'Julho',
+        8: 'Agosto',
+        9: 'Setembro',
+        10: 'Outubro',
+        11: 'Novembro',
+        12: 'Dezembro'
+    }
+    mes = mapeamento[mes]
+    return mes

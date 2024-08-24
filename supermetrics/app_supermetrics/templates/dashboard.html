@@ -39,9 +39,14 @@
                         </div>
                         <div class="d-flex flex-wrap">
                             <div class="col me-2 p-3 card ">
-                                <p class="text-verde text-start fw-bold">Quantidade de compras por dia do mês</p>
+                                <p class="text-verde text-start fw-bold">Quantidade de compras por mês</p>
+                                <div>
+                                    {% for mes in meses %}
+                                        <button>{{mes}}</button>
+                                    {% endfor %}
+                                </div>
                                 <div class="grafico">
-                                    {{grafico | safe}}
+                                    {{grafico_mes | safe}}
                                 </div>
                             </div>
                             <div class="col p-3 card ">
