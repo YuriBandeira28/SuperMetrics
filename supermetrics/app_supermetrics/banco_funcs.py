@@ -6,21 +6,6 @@ def create_engine():
     engine = sqlalchemy.create_engine(f'postgresql://postgres:postgres@{supermetrics.config.bd_url}:5432/ppi')
     return engine
 
-def get_df():
-
-    engine = create_engine()
-    sql = """select 
-                * 
-            from 
-                supermercado s 
-            where
-                extract (month from s.nfdatemis) = 6"""
-    # sql = "select * from supermercado"
-
-    df = pd.read_sql(sql, engine)
-    engine.dispose()
-
-    return df
 
 def get_df_mapa():
     engine = create_engine()
@@ -39,6 +24,7 @@ def get_df_mapa():
                     b.latitude is not null
                     and b.longitude is not null
                     and s.nfforcod <> 99999
+                    and s.itemprocod not in (63998, 64003, 63997, 63996, 63994, 63995, 1107, 1124, 1135, 1152, 1071, 1111,1078, 48018)
                     and s.trabairro not in ('INTERIOR', 'RURAL')
                 group by 
                     s.trabairro, 
@@ -64,6 +50,7 @@ def get_df_compras_dia(mes):
             where  
                 s.nfforcod <> 99999
                 and extract (month from s.nfdatemis) = {int(mes)}
+                and s.itemprocod not in (63998, 64003, 63997, 63996, 63994, 63995, 1107, 1124, 1135, 1152, 1071, 1111,1078, 48018)
             group by extract (day from s.nfdatemis)"""
     df = pd.read_sql(sql, engine)
     engine.dispose()
@@ -80,6 +67,7 @@ def get_df_compras_mes():
                 supermercado s 
             where  
                 s.nfforcod <> 99999
+                and s.itemprocod not in (63998, 64003, 63997, 63996, 63994, 63995, 1107, 1124, 1135, 1152, 1071, 1111,1078, 48018)
             group by extract (month from s.nfdatemis)"""
     df = pd.read_sql(sql, engine)
     engine.dispose()
@@ -120,6 +108,7 @@ def get_df_pizza():
             where 
                 s.nfforcod <> 99999
                 and s.munnom = 'FREDERICO WESTPHALEN'
+                and s.itemprocod not in (63998, 64003, 63997, 63996, 63994, 63995, 1107, 1124, 1135, 1152, 1071, 1111,1078, 48018)
             group by Localidade"""
     df = pd.read_sql(sql, engine)
     # df = df.melt(var_name='Localidade', value_name='Receita')
@@ -138,6 +127,7 @@ def get_df_brarras():
             from 
                 supermercado s 
             where s.nfforcod <> 99999
+            and s.itemprocod not in (63998, 64003, 63997, 63996, 63994, 63995, 1107, 1124, 1135, 1152, 1071, 1111,1078, 48018)
             group by
                 s.munnom,
                 localidade
@@ -156,6 +146,7 @@ def get_compras_produto():
             where 
                 s.nfforcod <> 99999
                 and extract (month from s.nfdatemis) = 6
+                and s.itemprocod not in (63998, 64003, 63997, 63996, 63994, 63995, 1107, 1124, 1135, 1152, 1071, 1111,1078, 48018)
             group by 
                 s.subnom
             having count(distinct s.nfnumero) >=500
