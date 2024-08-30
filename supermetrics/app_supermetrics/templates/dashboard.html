@@ -25,9 +25,9 @@
                 </div>
             </nav>
 
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4" id="inicio">
                 <div>
-                    <div class="bg-light p-3 mt-3 card col-12" id="inicio">
+                    <div class="bg-light p-3 mt-3 card col-12">
                         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                             <h2 class="text-verde">Bem-vindo ao SuperMetrics</h2>
                         </div>
@@ -38,25 +38,47 @@
                             <h5 class="text-verde m-0">Relatórios</h5>
                         </div>
                         <div class="d-flex flex-wrap">
-                            <div class="col me-2 p-3 card ">
+                            <div class="col me-2 p-3 card">
                                 <p class="text-verde text-start fw-bold">Quantidade de compras por mês</p>
-                                <div>
-                                    {% for mes in meses %}
-                                        <button>{{mes}}</button>
-                                    {% endfor %}
-                                </div>
                                 <div class="grafico">
                                     {{grafico_mes | safe}}
                                 </div>
+                                <div class="justify-content-center d-flex">
+                                    {% for mes in meses %}
+                                        <!-- <button type="button" class="btn btn-modal me-1" data-bs-toggle="modal" data-bs-target="#modal_mes_{{mes}}"> -->
+                                        <button type="button" class="btn btn-modal me-1" onclick="loadModalContent('{{mes}}')">
+                                            {{ mes }}
+                                        </button>
+                                      
+                                        <div class="modal fade" id="modal_mes_{{mes}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-xl">
+                                                <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Total de compras no mês de {{mes}}</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div id="modalContent_{{mes}}" class="grafico-modal">
+
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-modal" data-bs-dismiss="modal">Ok</button>
+                                                </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
                             </div>
                             <div class="col p-3 card ">
-                                <p class="text-verde text-start fw-bold">Quantidade de compras Cidade x Interior</p>
+                                <p class="text-verde text-start fw-bold">Receita total por localidade</p>
                                 <div class="grafico-div">
                                     {{grafico_pizza | safe}}
                                 </div>
                             </div>
                             <div class="col p-3 grafico-div grafico-barras">
-                                <p class="text-verde text-start fw-bold">Quantidade de compras Cidade x Interior</p>
+                                <p class="text-verde text-start fw-bold">Quantidade de compras por localidade</p>
                                 {{grafico_barras | safe}}
                             </div>
                             <div class="col p-3 grafico-div grafico-barras">
@@ -105,5 +127,24 @@
             campo.classList.add('active');
             // classList.remove('active')
         }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+      function loadModalContent(param) {
+        $.ajax({
+          url: '{% url "compras_dia" %}',  // Substitua "sua_view_name" pelo nome da sua view   
+          type: 'POST',
+          data: {
+            'mes': param, 
+            'csrfmiddlewaretoken': '{{ csrf_token }}' 
+          },
+          success: function(data) {
+            // Insere o conteúdo retornado na div do modal
+            $(`#modalContent_${param}`).html(data.grafico);
+            // Exibe o modal
+            $(`#modal_mes_${param}`).modal('show');
+          }
+        });
+      }
     </script>
 {% endblock %}

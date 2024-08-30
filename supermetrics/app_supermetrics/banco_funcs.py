@@ -53,16 +53,17 @@ def get_df_mapa():
 
     return df
 
-def get_df_compras_dia():
+def get_df_compras_dia(mes):
     engine = create_engine()
 
-    sql = """select 
+    sql = f"""select 
                 extract (day from s.nfdatemis) as "Dia do Mês",
                 count(distinct s.nfnumero) as "Total de Compras"
             from 
                 supermercado s 
             where  
                 s.nfforcod <> 99999
+                and extract (month from s.nfdatemis) = {int(mes)}
             group by extract (day from s.nfdatemis)"""
     df = pd.read_sql(sql, engine)
     engine.dispose()
@@ -88,28 +89,40 @@ def get_df_compras_mes():
 def get_df_pizza():
     engine = create_engine()
 
-    sql = """select 
-                (select 
-                    count(distinct s2.nfnumero) 
-                from 
-                    supermercado s2
-                where 
-                    s2.trabairro not in ('INTERIOR', 'RURAL')
-                    and s2.nfforcod <> 9999
-                ) as "Compras na cidade",
-                (select 
-                    count(distinct s3.nfnumero) 
-                from 
-                    supermercado s3
-                where 
-                    s3.trabairro in ('INTERIOR', 'RURAL')
-                    and s3.nfforcod <> 99999
-                ) as "Compras no interior"
+    # sql = """select 
+    #             (select 
+    #                 count(distinct s2.nfnumero) 
+    #             from 
+    #                 supermercado s2
+    #             where 
+    #                 s2.trabairro not in ('INTERIOR', 'RURAL')
+    #                 and s2.nfforcod <> 9999
+    #             ) as "Compras na cidade",
+    #             (select 
+    #                 count(distinct s3.nfnumero) 
+    #             from 
+    #                 supermercado s3
+    #             where 
+    #                 s3.trabairro in ('INTERIOR', 'RURAL')
+    #                 and s3.nfforcod <> 99999
+    #             ) as "Compras no interior"
+    #         from 
+    #             supermercado s 
+    #         limit 1"""
+    sql = """select
+                case
+                                when s.trabairro in ('INTERIOR', 'RURAL') then 'Interior'
+                                when s.trabairro not in ('INTERIOR', 'RURAL') then 'Cidade'
+                            end as Localidade,
+                sum(round((s.provlrpreco * s.itemqtdade),2)) as Receita
             from 
                 supermercado s 
-            limit 1"""
+            where 
+                s.nfforcod <> 99999
+                and s.munnom = 'FREDERICO WESTPHALEN'
+            group by Localidade"""
     df = pd.read_sql(sql, engine)
-    df = df.melt(var_name='Nome', value_name='Valor')
+    # df = df.melt(var_name='Localidade', value_name='Receita')
     engine.dispose()
     return df
 def get_df_brarras():
@@ -121,13 +134,13 @@ def get_df_brarras():
                 case
                     when s.trabairro in ('INTERIOR', 'RURAL') then 'Interior'
                     when s.trabairro not in ('INTERIOR', 'RURAL') then 'Cidade'
-                end as tipo
+                end as localidade
             from 
                 supermercado s 
             where s.nfforcod <> 99999
             group by
                 s.munnom,
-                tipo
+                localidade
             having count(distinct s.nfnumero) >=200"""
     df = pd.read_sql(sql, engine)
     engine.dispose()

@@ -15,8 +15,7 @@ def cria_grafico_compras_dia_mes(df: pd.DataFrame):
         showlegend=False,
         margin=dict(t=100, l=40, r=40),
         autosize=True,
-        height=600,
-        width=550
+        width = 1000
     )
     return fig.to_html(full_html=False)
 
@@ -47,7 +46,7 @@ def cria_grafico_barras(df: pd.DataFrame):
     fig = px.bar(df, 
                  x='Cidade', 
                  y='Total de Compras', 
-                 color='tipo', 
+                 color='localidade', 
                  text='Total de Compras', 
                  barmode='stack', color_discrete_sequence=["#ffc107", "#009245"])  
     
@@ -87,7 +86,7 @@ def cria_grafico_produtos(df: pd.DataFrame):
     return fig.to_html(full_html=False)
 
 
-def mapeia_meses(mes):
+def mapeia_meses(mes: int):
 
     mapeamento = {
         1: 'Janeiro',
@@ -102,6 +101,25 @@ def mapeia_meses(mes):
         10: 'Outubro',
         11: 'Novembro',
         12: 'Dezembro'
+    }
+    mes = mapeamento[mes]
+    return mes
+
+def mapeia_meses2(mes: str):
+
+    mapeamento = {
+        'Janeiro': 1,
+        'Fevereiro': 2,
+        'Março': 3,
+        'Abril': 4,
+        'Maio': 5,
+        'Junho': 6,
+        'Julho': 7,
+        'Agosto': 8,
+        'Setembro': 9,
+        'Outubro': 10,
+        'Novembro': 11,
+        'Dezembro': 12
     }
     mes = mapeamento[mes]
     return mes

@@ -6,7 +6,7 @@ from .banco_funcs import get_df_mapa, get_df_compras_dia, get_df_pizza, get_df_b
 import folium
 from folium.plugins import HeatMap
 from folium import plugins
-from .utils.processamento_dados import abrevia_cidade, cria_grafico_compras_dia_mes, cria_grafico_pizza, cria_grafico_barras, cria_grafico_produtos, cria_grafico_compras_mes, mapeia_meses
+from .utils.processamento_dados import abrevia_cidade, cria_grafico_compras_dia_mes, cria_grafico_pizza, cria_grafico_barras, cria_grafico_produtos, cria_grafico_compras_mes, mapeia_meses, mapeia_meses2
 
 def dashboard(request: HttpRequest):
 
@@ -29,14 +29,14 @@ def dashboard(request: HttpRequest):
     df_grafico_compras_mes = get_df_compras_mes()
 
     df_grafico_compras_mes['Mês'] = df_grafico_compras_mes['Mês'].astype(int)
-    df_grafico_compras_mes['mes_string'] = df_grafico_compras_mes['Mês'].apply(mapeia_meses)
-    meses = df_grafico_compras_mes['mes_string'].to_list()
+    df_grafico_compras_mes['mes_number'] = df_grafico_compras_mes['Mês'].astype(int)
+    df_grafico_compras_mes['Mês'] = df_grafico_compras_mes['Mês'].apply(mapeia_meses)
+    meses = df_grafico_compras_mes['Mês'].to_list()
 
 
     grafico_compras_mes = cria_grafico_compras_mes(df_grafico_compras_mes)
 
 
-    print(df_grafico_compras_mes)
     df_grafico_barras = get_df_brarras()
     grafico_barras = cria_grafico_barras(df_grafico_barras)
 
@@ -55,10 +55,10 @@ def dashboard(request: HttpRequest):
 
 
 def compras_dia(request: HttpRequest):
-
     if request.method == 'POST':
         mes = request.POST.get('mes')
+        mes = mapeia_meses2(mes)
         df_grafico_dias_mes = get_df_compras_dia(mes)
-        grafico_compras_dia = cria_grafico_compras_dia_mes(df_grafico_dias_mes)
 
-        return JsonResponse(grafico_compras_dia, safe=True)
+        grafico_compras_dia = cria_grafico_compras_dia_mes(df_grafico_dias_mes)
+        return JsonResponse({'grafico': grafico_compras_dia}, safe=True)

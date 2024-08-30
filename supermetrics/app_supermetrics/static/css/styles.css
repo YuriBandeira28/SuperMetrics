@@ -75,6 +75,13 @@ body {
     align-items: left;
 }
 
+.grafico-modal{
+    width: 100% !important;
+    height: 100% !important;
+    display: flex;
+    justify-content: center;
+}
+
 .mapa-div{
     border-radius: 15px;
     box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
@@ -82,6 +89,15 @@ body {
     max-width: 70%;
     height: 520px;
     background-color: #ffffff;
+}
+
+.btn-modal{
+    background-color: #004928;
+    color: #ffffff;
+}
+
+.btn-modal:hover{
+    background-color: #009245;
 }
 
 .mapa{
