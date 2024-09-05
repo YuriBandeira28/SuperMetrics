@@ -30,7 +30,7 @@ O projeto foi todo construído utilizando Python, com framwork Django, juntament
 # Se você quiser usar
 Certifique-se de ter todas as técnologias utilizadas instaladas em sua máquina
 
-## Clonando o repositória
+## Clonando o repositório
 ```bash
 git clone https://github.com/YuriBandeira28/SuperMetrics.git
 ```
